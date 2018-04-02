@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 01. Apr 2018 um 15:00
+-- Erstellungszeit: 02. Apr 2018 um 14:13
 -- Server-Version: 10.1.31-MariaDB
 -- PHP-Version: 7.2.3
 
@@ -43,7 +43,8 @@ CREATE TABLE `benutzer` (
 
 INSERT INTO `benutzer` (`ID`, `Nutzername`, `Vorname`, `Nachname`, `Rolle`, `Passwort`) VALUES
 (1, 'hhhhhhhh', 'dddddddd', 'hhhhhhhhh', 'Mitarbeiter', '107523'),
-(2, 'admin', 'Jan', 'Getschmann', 'Manager', '92668751');
+(2, 'admin', 'Jan', 'Getschmann', 'Manager', '92668751'),
+(3, 'holz', 'holz', 'holz', 'Mitarbeiter', '3208405');
 
 -- --------------------------------------------------------
 
@@ -75,10 +76,9 @@ DELIMITER ;
 
 CREATE TABLE `fluege` (
   `ID` int(20) NOT NULL,
-  `Start` int(10) NOT NULL,
-  `Ziel` int(10) NOT NULL,
   `Datum` date NOT NULL,
   `Zeit` time NOT NULL,
+  `route` int(10) NOT NULL,
   `Essen` enum('Käse/Schinken- Brot','Pizza','Döner','Pasta') CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Flugzeug` int(10) NOT NULL,
   `gebucht` int(4) NOT NULL DEFAULT '0'
@@ -92,11 +92,42 @@ CREATE TABLE `fluege` (
 
 CREATE TABLE `flugzeug` (
   `ID` int(10) NOT NULL,
-  `Code` varchar(7) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'Flugzeugcode',
+  `Code` varchar(7) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'Flugzeugcode',
   `Hersteller` enum('Airbus','Boing','Embraer','Bombardier') CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Flugzeugtyp` varchar(6) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `MaxPassagiere` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `flugzeug`
+--
+
+INSERT INTO `flugzeug` (`ID`, `Code`, `Hersteller`, `Flugzeugtyp`, `MaxPassagiere`) VALUES
+(1, 'MH 7324', 'Boing', '747', 400),
+(3, 'AA 1111', 'Airbus', 'A380', 500),
+(4, 'AB', 'Airbus', 'ab', 5),
+(5, 'affsf', 'Airbus', 'sfs', 5),
+(6, 'gshsh', 'Airbus', 'jf', 6),
+(7, 'dhdhd', 'Airbus', 'ddg', 8),
+(8, 'fhfh', 'Airbus', 'fh', 8),
+(9, 'hfth', 'Airbus', 'thf', 6),
+(10, 'fhtj', 'Airbus', 'kkk', 9),
+(11, 'gjg', 'Airbus', 'gjzt', 9),
+(12, 'cfzgj', 'Airbus', 'fjfj', 8),
+(13, 'fjtjr', 'Airbus', 'dthj', 1),
+(14, 'djrthfd', 'Airbus', 'drtzrt', 66),
+(15, 'dhdh', 'Airbus', 'dhdh', 8),
+(16, 'dhkftzj', 'Airbus', 'hsxt', 8),
+(17, 'hhhj', 'Airbus', 'fht', 5),
+(18, 'izz', 'Airbus', 'hrt', 47),
+(19, 'dfhm', 'Airbus', 'nfb', 888),
+(20, 'dhdhd', 'Airbus', 'dhdh', 6),
+(21, 'mnb', 'Airbus', 'xbv', 34),
+(22, 'cbc', 'Airbus', 'brr', 55),
+(23, 'cbbccbc', 'Airbus', 'cbcbb', 5),
+(24, 'ljhg', 'Airbus', 'jhhg', 47),
+(25, 'fhfh', 'Airbus', 'kkm', 88),
+(26, 'fnfnfn', 'Airbus', 'nfn', 88);
 
 -- --------------------------------------------------------
 
@@ -119,6 +150,18 @@ CREATE TABLE `kunde` (
 CREATE TABLE `ort` (
   `ID` int(10) NOT NULL,
   `Name` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `route`
+--
+
+CREATE TABLE `route` (
+  `ID` int(10) NOT NULL,
+  `start` int(10) NOT NULL,
+  `ziel` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -167,6 +210,12 @@ ALTER TABLE `ort`
   ADD UNIQUE KEY `ID` (`ID`);
 
 --
+-- Indizes für die Tabelle `route`
+--
+ALTER TABLE `route`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- AUTO_INCREMENT für exportierte Tabellen
 --
 
@@ -174,7 +223,7 @@ ALTER TABLE `ort`
 -- AUTO_INCREMENT für Tabelle `benutzer`
 --
 ALTER TABLE `benutzer`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `buchungen`
@@ -192,7 +241,7 @@ ALTER TABLE `fluege`
 -- AUTO_INCREMENT für Tabelle `flugzeug`
 --
 ALTER TABLE `flugzeug`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT für Tabelle `kunde`
@@ -204,6 +253,12 @@ ALTER TABLE `kunde`
 -- AUTO_INCREMENT für Tabelle `ort`
 --
 ALTER TABLE `ort`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `route`
+--
+ALTER TABLE `route`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
