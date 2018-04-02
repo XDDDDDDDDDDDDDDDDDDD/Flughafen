@@ -4,16 +4,17 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-<head>
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Neues FLugzeug der Flotte hinzufügen</title>
-</head>
-<body>
+<title>Neues Flugzeug der Flotte hinzufügen</title>
+	<h:outputStylesheet name="style.css"/>
+</h:head>
+<h:body>
 	<h1>
 		<h:outputText value="Neues Flugzeug der Flotte hinzufügen" />
 	</h1>
 
-	<h:form id="input">
+	<h:form id="input" styleClass="input">
 		<br></br>
 		<h:outputText value="Flugzeugcode" />
 		<br></br>
@@ -48,11 +49,11 @@
 		<h:outputText id="msg" value="#{flugzeugBean.message}"></h:outputText>
 		<br></br>
 		<br></br>
-		<h:commandButton id="erstellen" type="submit" value="Erstellen"
+		<h:commandButton id="erstellen" type="submit" styleClass="button" value="Erstellen"
 			action="#{flugzeugBean.erstellen}">
 			<f:ajax execute="input" render="msg"></f:ajax>
 		</h:commandButton>
 	</h:form>
 	<ui:include src="/resources/footer.xhtml" />
-</body>
+</h:body>
 </html>

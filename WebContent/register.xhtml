@@ -4,16 +4,17 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-<head>
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Registrierung</title>
-</head>
-<body>
+	<h:outputStylesheet name="style.css"/>
+</h:head>
+<h:body>
 	<h1>
 		<h:outputText value="Registrierung" />
 	</h1>
 
-	<h:form id="input">
+	<h:form id="input" styleClass="input">
 		<br></br>
 		<h:outputText value="Nutzername" />
 		<br></br>
@@ -56,11 +57,11 @@
 		<h:outputText id="msg" value="#{userBean.message}"></h:outputText>
 		<br></br>
 		<br></br>
-		<h:commandButton id="registrieren" type="submit" value="Registrieren"
+		<h:commandButton id="registrieren" type="submit" styleClass="button" value="Registrieren"
 			action="#{userBean.registrieren}">
 			<f:ajax execute="input" render="msg"></f:ajax>
 		</h:commandButton>
 	</h:form>
 	<ui:include src="/resources/footer.xhtml" />
-</body>
+</h:body>
 </html>

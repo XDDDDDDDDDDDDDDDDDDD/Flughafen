@@ -1,7 +1,8 @@
 @charset "ISO-8859-1";
 
 body {
-	background-image: url("resources/hintergrund.jpg") no-repeat center center fixed;
+	background-color: lightblue;
+	background-image: url("#{resource['hintergrund.jpg']}") no-repeat center center fixed;
 }
 
 ul {
@@ -27,4 +28,45 @@ li a {
 li a:hover {
 	background-color: #555;
 	color: white;
+}
+
+
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+th {
+	background-color:grey;
+	padding: 10px;
+}
+
+tr:nth-child(odd)		{
+	background-color:#eee;
+}
+
+tr:nth-child(even)		{
+	background-color:#fff;
+}
+
+.logoutButton {
+	float:right;
+}
+
+.button {
+	text-align:center;
+	display: inline-block;
+	margin: 15px;
+}
+
+form {
+	text-align:center;
+}
+
+outputText {
+	margin: 10px;
+}
+
+inputText {
+	margin: 10px;
 }
