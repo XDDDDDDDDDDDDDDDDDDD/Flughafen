@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Neues Route hinzufügen</title>
+</head>
+<body>
+
+	<ui:include src="/resources/header.xhtml" />
+	<ui:include src="#{userBean.including}" />
+	<h1>
+		<h:outputText value="Neues Flugroute hinzufügen" />
+	</h1>
+
+	<h:form id="input">
+
+		<br></br>
+		<h:outputText value="Startflughafen" />
+		<br></br>
+		<h:selectOneMenu value="#{routeBean.start}" converter="#{ortConverter}">
+			<f:selectItems value="#{routeBean.orte}" var="ort" itemValue="#{ort.id}"
+				itemLabel="#{ort.name}" />
+		</h:selectOneMenu>
+
+		<br></br>
+		<h:outputText value="Zielflughafen" />
+		<br></br>
+		<h:selectOneMenu value="#{routeBean.ziel}" converter="#{ortConverter}">
+			<f:selectItems value="#{routeBean.orte}" var="ort" itemValue="#{ort.id}"
+				itemLabel="#{ort.name}" />
+		</h:selectOneMenu>
+
+		<br></br>
+		<h:outputText value="Soll die Route in beide Richtungen möglich sein?" />
+		<br></br>
+		<h:selectBooleanCheckbox value="#{routeBean.both}" />
+
+
+		<br></br>
+		<br></br>
+		<h:outputText id="msg" value="#{routeBean.message}"></h:outputText>
+		<br></br>
+		<br></br>
+		<h:commandButton id="erstellen" type="submit" value="Erstellen"
+			action="#{routeBean.erstellen}">
+			<f:ajax execute="input" render="msg"></f:ajax>
+		</h:commandButton>
+	</h:form>
+	<ui:include src="/resources/footer.xhtml" />
+</body>
+</html>
