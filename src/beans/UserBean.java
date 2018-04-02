@@ -175,7 +175,6 @@ public class UserBean
 				benutzer.setNutzername(nutzername);
 				saveUser(benutzer);
 
-				FacesContext context = FacesContext.getCurrentInstance();
 				sessionAndRole();
 				setPasswort("");
 				setPasswortConfirm("");}

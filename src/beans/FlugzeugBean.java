@@ -8,7 +8,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import ejb.FlugzeugEJB;
-import entity.Benutzer;
 import entity.Flugzeug;
 
 @ManagedBean
@@ -131,6 +130,15 @@ public class FlugzeugBean {
 		{
 			setMessage("Bitte eine maximale Anzahl an zu befördernden Passagieren eingeben.");
 			return false;
+		}
+		List<Flugzeug> l=getAllFlugzeuge();
+		for(Flugzeug f:l)
+		{
+			if(f.getCode().equals(code))
+			{
+				setMessage("Der Flugzeugcode existiert bereits.");
+				return false;
+			}
 		}
 		return true;
 	}

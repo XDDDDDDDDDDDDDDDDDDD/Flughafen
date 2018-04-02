@@ -27,7 +27,7 @@ public class OrteEJB
 	public void deleteOrt(Ort ort)
 	{
 		if (!em.contains(ort)) {
-		    ort = em.merge(ort);
+			ort = em.merge(ort);
 		}
 		em.remove(ort);
 	}
@@ -38,10 +38,10 @@ public class OrteEJB
 		return (List<Ort>) q.getResultList();
 	}
 	
-	public Ort getOrtByName(String name)
+	public Ort getOrtByID(int id)
 	{
 		Query q = em.createQuery(
-				"SELECT DISTINCT ort FROM Ort ort WHERE ort.code = '" + name + "'");
+				"SELECT DISTINCT ort FROM Ort ort WHERE ort.id = '" + id + "'");
 		return (Ort) q.getSingleResult();
 	}
 

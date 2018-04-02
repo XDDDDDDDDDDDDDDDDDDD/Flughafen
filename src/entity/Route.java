@@ -14,11 +14,18 @@ public class Route implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private int start;
+	//uni-directional one-to-one association to Ort
+	@OneToOne
+	@JoinColumn(name="start")
+	private Ort ort1;
 
-	private int ziel;
+	//uni-directional one-to-one association to Ort
+	@OneToOne
+	@JoinColumn(name="ziel")
+	private Ort ort2;
 
 	public Route() {
 	}
@@ -31,20 +38,20 @@ public class Route implements Serializable {
 		this.id = id;
 	}
 
-	public int getStart() {
-		return this.start;
+	public Ort getOrt1() {
+		return this.ort1;
 	}
 
-	public void setStart(int start) {
-		this.start = start;
+	public void setOrt1(Ort ort1) {
+		this.ort1 = ort1;
 	}
 
-	public int getZiel() {
-		return this.ziel;
+	public Ort getOrt2() {
+		return this.ort2;
 	}
 
-	public void setZiel(int ziel) {
-		this.ziel = ziel;
+	public void setOrt2(Ort ort2) {
+		this.ort2 = ort2;
 	}
 
 }

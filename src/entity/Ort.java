@@ -14,6 +14,7 @@ public class Ort implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String name;
@@ -36,5 +37,6 @@ public class Ort implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 }
