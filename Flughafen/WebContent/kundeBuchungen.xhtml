@@ -58,7 +58,7 @@
 			<h:column>
 				<f:facet name="header">Löschen</f:facet>
 				<h:commandLink value="Delete"
-					action="#{kundeBean.removeBuchung(buchung.kunde, buchung)}" immediate="true">
+					action="#{kundeBean.removeBuchung(buchung.kunde.id, buchung.id)}" immediate="true">
 				</h:commandLink>
 			</h:column>
 

@@ -44,5 +44,12 @@ public class FlugzeugEJB
 				"SELECT DISTINCT flugzeug FROM Flugzeug flugzeug WHERE flugzeug.code = '" + code + "'");
 		return (Flugzeug) q.getSingleResult();
 	}
+	
+	public Flugzeug getFlugzeugById(int id)
+	{
+		Query q = em.createQuery(
+				"SELECT DISTINCT flugzeug FROM Flugzeug flugzeug WHERE flugzeug.id = '" + id + "'");
+		return (Flugzeug) q.getSingleResult();
+	}
 
 }

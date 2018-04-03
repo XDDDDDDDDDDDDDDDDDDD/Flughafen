@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import entity.Buchungen;
 import entity.Kunde;
+import ejb.BuchungenEJB;
 import ejb.KundenEJB;
 
 @ManagedBean
@@ -19,6 +20,9 @@ public class KundeBean {
 
 	@Inject
 	KundenEJB kundenEJB;
+	
+	@Inject
+	BuchungenEJB buchungenEJB;
 
 	public String getVorname() {
 		return vorname;
@@ -77,13 +81,27 @@ public class KundeBean {
 		kundenEJB.saveKunde(kunde);
 	}
 
-	public void deleteKunde(Kunde o) {
+	public void deleteKunde(Kunde o) 
+	{
+		List<Buchungen> alleB=getBuchungen(o);
+		if(alleB!=null)
+		{
+			for(Buchungen b:alleB)
+			{
+				kundenEJB.removeBuchung(o, b);
+			}
+		}
 		kundenEJB.deleteKunde(o);
 	}
 	
 	public List<Buchungen> getBuchungen(Kunde kunde)
 	{
 		return kundenEJB.getBuchungenByKunde(kunde);
+	}
+	
+	public Buchungen getBuchungById(int id)
+	{
+		return buchungenEJB.getBuchungenByID(id);
 	}
 
 	public void erstellen() {
@@ -143,9 +161,11 @@ public class KundeBean {
 		}
 	}
 	
-	public void removeBuchung(Kunde k, Buchungen b)
+	public void removeBuchung(int k, int b)
 	{
-		kundenEJB.removeBuchung(k, b);
+		Kunde kunde=getKundeById(k);
+		Buchungen buch=getBuchungById(b);
+		kundenEJB.removeBuchung(kunde, buch);
 	}
 
 }
