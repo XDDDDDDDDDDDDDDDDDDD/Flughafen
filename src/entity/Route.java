@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -17,13 +18,17 @@ public class Route implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	//uni-directional one-to-one association to Ort
-	@OneToOne
+	//bi-directional many-to-one association to Fluege
+	@OneToMany(mappedBy="route")
+	private List<Fluege> flueges;
+
+	//bi-directional many-to-one association to Ort
+	@ManyToOne
 	@JoinColumn(name="start")
 	private Ort ort1;
 
-	//uni-directional one-to-one association to Ort
-	@OneToOne
+	//bi-directional many-to-one association to Ort
+	@ManyToOne
 	@JoinColumn(name="ziel")
 	private Ort ort2;
 
@@ -36,6 +41,28 @@ public class Route implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<Fluege> getFlueges() {
+		return this.flueges;
+	}
+
+	public void setFlueges(List<Fluege> flueges) {
+		this.flueges = flueges;
+	}
+
+	public Fluege addFluege(Fluege fluege) {
+		getFlueges().add(fluege);
+		fluege.setRoute(this);
+
+		return fluege;
+	}
+
+	public Fluege removeFluege(Fluege fluege) {
+		getFlueges().remove(fluege);
+		fluege.setRoute(null);
+
+		return fluege;
 	}
 
 	public Ort getOrt1() {

@@ -2,8 +2,8 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -19,18 +19,26 @@ public class Fluege implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Temporal(TemporalType.DATE)
-	private Date datum;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date abflugzeit;
 
 	private String essen;
 
-	private int flugzeug;
-
 	private int gebucht;
 
-	private int route;
+	//bi-directional many-to-one association to Buchungen
+	@OneToMany(mappedBy="fluege")
+	private List<Buchungen> buchungens;
 
-	private Time zeit;
+	//bi-directional many-to-one association to Flugzeug
+	@ManyToOne
+	@JoinColumn(name="Flugzeug")
+	private Flugzeug flugzeug;
+
+	//bi-directional many-to-one association to Route
+	@ManyToOne
+	@JoinColumn(name="route")
+	private Route route;
 
 	public Fluege() {
 	}
@@ -43,12 +51,12 @@ public class Fluege implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDatum() {
-		return this.datum;
+	public Date getAbflugzeit() {
+		return this.abflugzeit;
 	}
 
-	public void setDatum(Date datum) {
-		this.datum = datum;
+	public void setAbflugzeit(Date abflugzeit) {
+		this.abflugzeit = abflugzeit;
 	}
 
 	public String getEssen() {
@@ -59,14 +67,6 @@ public class Fluege implements Serializable {
 		this.essen = essen;
 	}
 
-	public int getFlugzeug() {
-		return this.flugzeug;
-	}
-
-	public void setFlugzeug(int flugzeug) {
-		this.flugzeug = flugzeug;
-	}
-
 	public int getGebucht() {
 		return this.gebucht;
 	}
@@ -75,20 +75,42 @@ public class Fluege implements Serializable {
 		this.gebucht = gebucht;
 	}
 
-	public int getRoute() {
+	public List<Buchungen> getBuchungens() {
+		return this.buchungens;
+	}
+
+	public void setBuchungens(List<Buchungen> buchungens) {
+		this.buchungens = buchungens;
+	}
+
+	public Buchungen addBuchungen(Buchungen buchungen) {
+		getBuchungens().add(buchungen);
+		buchungen.setFluege(this);
+
+		return buchungen;
+	}
+
+	public Buchungen removeBuchungen(Buchungen buchungen) {
+		getBuchungens().remove(buchungen);
+		buchungen.setFluege(null);
+
+		return buchungen;
+	}
+
+	public Flugzeug getFlugzeug() {
+		return this.flugzeug;
+	}
+
+	public void setFlugzeug(Flugzeug flugzeug) {
+		this.flugzeug = flugzeug;
+	}
+
+	public Route getRoute() {
 		return this.route;
 	}
 
-	public void setRoute(int route) {
+	public void setRoute(Route route) {
 		this.route = route;
-	}
-
-	public Time getZeit() {
-		return this.zeit;
-	}
-
-	public void setZeit(Time zeit) {
-		this.zeit = zeit;
 	}
 
 }

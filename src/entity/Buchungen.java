@@ -17,9 +17,15 @@ public class Buchungen implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private int fluegeID;
+	//bi-directional many-to-one association to Fluege
+	@ManyToOne
+	@JoinColumn(name="fluegeID")
+	private Fluege fluege;
 
-	private int kundeID;
+	//bi-directional many-to-one association to Kunde
+	@ManyToOne
+	@JoinColumn(name="kundeID")
+	private Kunde kunde;
 
 	public Buchungen() {
 	}
@@ -32,20 +38,20 @@ public class Buchungen implements Serializable {
 		this.id = id;
 	}
 
-	public int getFluegeID() {
-		return this.fluegeID;
+	public Fluege getFluege() {
+		return this.fluege;
 	}
 
-	public void setFluegeID(int fluegeID) {
-		this.fluegeID = fluegeID;
+	public void setFluege(Fluege fluege) {
+		this.fluege = fluege;
 	}
 
-	public int getKundeID() {
-		return this.kundeID;
+	public Kunde getKunde() {
+		return this.kunde;
 	}
 
-	public void setKundeID(int kundeID) {
-		this.kundeID = kundeID;
+	public void setKunde(Kunde kunde) {
+		this.kunde = kunde;
 	}
 
 }

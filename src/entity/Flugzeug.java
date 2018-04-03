@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -24,6 +25,10 @@ public class Flugzeug implements Serializable {
 	private String hersteller;
 
 	private int maxPassagiere;
+
+	//bi-directional many-to-one association to Fluege
+	@OneToMany(mappedBy="flugzeug")
+	private List<Fluege> flueges;
 
 	public Flugzeug() {
 	}
@@ -66,6 +71,28 @@ public class Flugzeug implements Serializable {
 
 	public void setMaxPassagiere(int maxPassagiere) {
 		this.maxPassagiere = maxPassagiere;
+	}
+
+	public List<Fluege> getFlueges() {
+		return this.flueges;
+	}
+
+	public void setFlueges(List<Fluege> flueges) {
+		this.flueges = flueges;
+	}
+
+	public Fluege addFluege(Fluege fluege) {
+		getFlueges().add(fluege);
+		fluege.setFlugzeug(this);
+
+		return fluege;
+	}
+
+	public Fluege removeFluege(Fluege fluege) {
+		getFlueges().remove(fluege);
+		fluege.setFlugzeug(null);
+
+		return fluege;
 	}
 
 }
