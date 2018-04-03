@@ -5,13 +5,58 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Flüge</title>
-	<h:outputStylesheet name="style.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Flüge erstellen</title>
+	<h:outputStylesheet name="style.css" />
 </h:head>
 <h:body>
 	<ui:include src="/resources/header.xhtml" />
 	<ui:include src="#{userBean.including}" />
+	<h1>Neuen Flug erstellen</h1>
+	
+	<!-- Neuen Flug erstellen (nur Manager -->
+	
+	
+	<h:form id="input">
+
+		<br></br>
+		<h:outputText value="Flugzeug"></h:outputText>
+		<br></br>
+		<h:selectOneMenu value="#{fluegeBean.flugzeugID}">
+			<f:selectItems value="#{flugzeugBean.allFlugzeuge}" var="flugzeug"
+				itemValue="#{flugzeug.id}" itemLabel="#{flugzeug.code}" />
+		</h:selectOneMenu>
+
+		<br></br>
+		<h:outputText value="Route"></h:outputText>
+		<br></br>
+		<h:selectOneMenu value="#{fluegeBean.routeID}">
+			<f:selectItems value="#{routeBean.allRouten}" var="route"
+				itemValue="#{route.id}"
+				itemLabel="#{route.ort1.name} - #{route.ort2.name}" />
+		</h:selectOneMenu>
+		<br></br>
+
+		<h:outputText value="Abflugszeit"></h:outputText>
+		<br></br>
+		<h:inputText value="#{fluegeBean.cal}" maxlength="19">
+		</h:inputText>
+		<br></br>
+		<h:outputText value="yyyy-mm-dd hh:mm"></h:outputText>
+
+		<br></br>
+		<br></br>
+		<h:outputText id="msg" value="#{fluegeBean.message}"></h:outputText>
+		<br></br>
+		<br></br>
+
+		<h:commandButton id="erstellen" type="submit" value="Erstellen"
+			action="#{fluegeBean.erstellen}">
+			<f:ajax execute="input" render="msg"></f:ajax>
+		</h:commandButton>
+
+
+	</h:form>
 	<ui:include src="/resources/footer.xhtml" />
 </h:body>
 </html>

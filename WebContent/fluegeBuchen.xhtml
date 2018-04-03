@@ -12,6 +12,8 @@
 <h:body>
 	<ui:include src="/resources/header.xhtml" />
 	<ui:include src="#{userBean.including}" />
+	
+	<!-- Zum Buchen eines Fluges für einen Kunden -->
 
 	<h:form id="feld">
 		<br></br>
@@ -55,9 +57,16 @@
 			</h:column>
 
 			<h:column>
+				<f:facet name="header">Buchungen</f:facet>
+				<h:commandButton value="Buchungen" type="submit" id="buchungen"
+					action="#{gebuchtBean.uebersicht(flug.id)}">
+				</h:commandButton>
+			</h:column>
+			
+			<h:column>
 				<f:facet name="header">Buchen</f:facet>
 				<h:commandButton value="Buchen" type="submit" id="buchen"
-					action="#{buchenBean.buchen(flug)}">
+					action="#{buchenBean.buchen(flug.id)}">
 				</h:commandButton>
 			</h:column>
 

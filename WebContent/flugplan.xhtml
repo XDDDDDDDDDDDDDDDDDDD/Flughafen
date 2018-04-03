@@ -5,13 +5,65 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Flugplan</title>
-	<h:outputStylesheet name="style.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Flugplan</title>
+	<h:outputStylesheet name="style.css" />
 </h:head>
 <h:body>
 	<ui:include src="/resources/header.xhtml" />
 	<ui:include src="#{userBean.including}" />
+
+	<h:form id="feld">
+	
+	<!-- Der Flugplan mit den kommenden Flügen -->
+	
+	<h:inputText value="#{planBean.cal}">
+	</h:inputText>
+	<br></br>
+	<br></br>
+		<h:dataTable value="#{planBean.alle}" var="flug">
+			<h:column>
+				<f:facet name="header">Flugindex</f:facet>
+				<h:outputText value="#{flug.id}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Startort</f:facet>
+				<h:outputText value="#{flug.getRoute().ort1.name}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Zielort</f:facet>
+				<h:outputText value="#{flug.getRoute().ort2.name}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Flugzeug</f:facet>
+				<h:outputText value="#{flug.flugzeug.code}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Datum</f:facet>
+				<h:outputText value="#{flug.abflugzeit}">
+					<f:convertDateTime pattern="dd.MM.yyyy HH:mm">
+					</f:convertDateTime>
+				</h:outputText>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Auslastung</f:facet>
+				<h:outputText value="#{flug.gebucht}"></h:outputText>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Status</f:facet>
+				<h:outputText value=""></h:outputText>
+			</h:column>
+			
+			</h:dataTable>
+			
+		<f:ajax interval="1" event="mouseover" execute="#{planBean.updaten()}" update="feld" render="feld"></f:ajax>
+	</h:form>
 	<ui:include src="/resources/footer.xhtml" />
 </h:body>
 </html>
