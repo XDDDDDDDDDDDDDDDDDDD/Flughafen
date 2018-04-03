@@ -95,7 +95,7 @@ public class RouteBean
 		routeEJB.deleteRoute(route);
 	}
 	
-	public void erstellen()
+	public void erstellen()     //Neue Route erstellen
 	{
 		Ort s=getOrtById(start);
 		Ort z=getOrtById(ziel);
@@ -122,7 +122,8 @@ public class RouteBean
 		}
 	}
 	
-	private boolean inputTesten() {
+	private boolean inputTesten()   //Input korrekt?
+	{
 		if (start==ziel) {
 			setMessage("Startort und Ziel müssen unterschiedlich sein.");
 			return false;
@@ -137,7 +138,7 @@ public class RouteBean
 		return true;
 	}
 	
-	public void neu()
+	public void neu()   //Umleitung zum Neuerstellen
 	{
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {

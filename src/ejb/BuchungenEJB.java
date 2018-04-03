@@ -11,7 +11,7 @@ import entity.Buchungen;
 
 @LocalBean
 @Stateless
-public class BuchungenEJB 
+public class BuchungenEJB  //EJB für die Buchungen, hängt mit der Liste in der Kunden-Klasse zusammen
 {
 	
 	@PersistenceContext
@@ -31,7 +31,7 @@ public class BuchungenEJB
 			buchung = em.merge(buchung);
 		}
 		em.remove(buchung);
-		buchung.getKunde().removeBuchungen(buchung);
+		buchung.getKunde().removeBuchungen(buchung);  
 	}
 	
 	public List<Buchungen> getAll()

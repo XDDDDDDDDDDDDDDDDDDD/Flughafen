@@ -11,7 +11,7 @@ import ejb.BenutzerEJB;
 
 @ManagedBean
 @SessionScoped
-public class UserBean 
+public class UserBean  //Bean für den arbeitenden Nutzer, solange er eingeloggt ist
 {
 
 	@Inject
@@ -98,7 +98,8 @@ public class UserBean
 		return benutzerEJB.getUserByName(nutzername);
 	}
 
-	public void einloggen() {
+	public void einloggen()   //Prüfen des Passworts und Nutzernamens
+	{
 		try {
 			Benutzer user = getUserByName(getNutzername());
 
@@ -120,7 +121,8 @@ public class UserBean
 
 	}
 
-	public void registrierenRedirect() {
+	public void registrierenRedirect()   //Umleiten zum registrieren
+	{
 		setNutzername("");
 		setPasswort("");
 		setMessage("");
@@ -132,7 +134,8 @@ public class UserBean
 		}
 	}
 
-	public void ausloggen() {
+	public void ausloggen()   //ausloggen (Button oben rechts)
+	{
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().invalidateSession();
 		try {
@@ -142,7 +145,8 @@ public class UserBean
 		}
 	}
 
-	private void sessionAndRole() {
+	private void sessionAndRole()  //Session-Variablen setzten und anhand der Rolle den include der Navigationsbar setzen
+	{
 		try {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.getExternalContext().getSessionMap().put("nutzername", getNutzername());
@@ -163,7 +167,8 @@ public class UserBean
 
 	}
 
-	public void registrieren() {
+	public void registrieren()   //registrieren (in der register.xhtml)
+	{
 		if (inputTesten()) {
 			if (istDoppelt()) {
 				Benutzer benutzer = new Benutzer();
@@ -181,7 +186,8 @@ public class UserBean
 		}
 	}
 
-	private boolean inputTesten() {
+	private boolean inputTesten()   //Nutzerinput der register.xhtml korrekt?
+	{
 		if (nutzername == null || nutzername.isEmpty()) {
 			setMessage("Bitte einen Nutzernamen eintragen.");
 			return false;

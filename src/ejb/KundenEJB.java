@@ -14,7 +14,7 @@ import entity.Kunde;
 
 @LocalBean
 @Stateless
-public class KundenEJB 
+public class KundenEJB //EJB für die Kunden
 {
 	
 	@PersistenceContext

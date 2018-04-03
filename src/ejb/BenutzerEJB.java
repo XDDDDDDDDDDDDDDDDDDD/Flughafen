@@ -11,7 +11,7 @@ import entity.Benutzer;
 
 @LocalBean
 @Stateless
-public class BenutzerEJB 
+public class BenutzerEJB //EJB für die Benutzer
 {
 	
 	@PersistenceContext

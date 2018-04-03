@@ -53,7 +53,8 @@ public class OrtBean {
 		orteEJB.deleteOrt(o);
 	}
 
-	public void erstellen() {
+	public void erstellen()   //Neuer Ort
+	{
 		if (inputTesten()) {
 			Ort f = new Ort();
 			f.setName(name);

@@ -12,7 +12,7 @@ import entity.Route;
 
 @LocalBean
 @Stateless
-public class RouteEJB 
+public class RouteEJB  //EJB für die Route
 {
 	
 	@PersistenceContext

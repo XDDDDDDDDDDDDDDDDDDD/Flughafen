@@ -78,7 +78,7 @@ public class BuchenBean {
 	}
 	
 
-	private boolean inputTesten() 
+	private boolean inputTesten()  //Input korrekt?
 	{
 		List<Buchungen> l=buchungenEJB.getAll();
 		if(l.isEmpty())
@@ -87,6 +87,7 @@ public class BuchenBean {
 		}
 		for(Buchungen b:l)
 		{
+			b.getFluege().getId();
 			if(b.getFluege().getId()==flugID && b.getKunde().getId()==kundenID)
 			{
 				setMessage("Der Kunde ist bereits dem Flug zugewiesen.");
@@ -100,14 +101,15 @@ public class BuchenBean {
 
 
 	
-	public void buchen(Fluege f)
+	public void buchen(int f)   //neue Buchung für einen Kunden
 	{
 		
-		flugID=f.getId();
+		flugID=f;
+		Fluege flug=getFluegeById(f);
 		if(inputTesten())
 		{
 			Buchungen b= new Buchungen();
-			b.setFluege(f);
+			b.setFluege(flug);
 			b.setKunde(getKundeById(kundenID));
 			buchungenEJB.saveBuchungen(b);
 			

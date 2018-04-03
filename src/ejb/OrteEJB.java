@@ -11,7 +11,7 @@ import entity.Ort;
 
 @LocalBean
 @Stateless
-public class OrteEJB 
+public class OrteEJB //EJB für die Orte
 {
 	
 	@PersistenceContext

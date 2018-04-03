@@ -11,7 +11,7 @@ import entity.Fluege;
 
 @LocalBean
 @Stateless
-public class FluegeEJB 
+public class FluegeEJB //EJB für die Flüge
 {
 	
 	@PersistenceContext

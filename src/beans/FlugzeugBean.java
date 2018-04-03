@@ -94,7 +94,8 @@ public class FlugzeugBean {
 		
 	}
 
-	public void erstellen() {
+	public void erstellen()   //Neues FLugzeug
+	{
 		if (inputTesten()) 
 		{
 			Flugzeug f= new Flugzeug();
