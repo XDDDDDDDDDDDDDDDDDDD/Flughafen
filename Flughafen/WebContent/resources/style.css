@@ -1,0 +1,72 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: lightblue;
+	background-image: url("#{resource['hintergrund.jpg']}") no-repeat center center fixed;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #f3f3f3;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li a:hover {
+	background-color: #555;
+	color: white;
+}
+
+
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+th {
+	background-color:grey;
+	padding: 10px;
+}
+
+tr:nth-child(odd)		{
+	background-color:#eee;
+}
+
+tr:nth-child(even)		{
+	background-color:#fff;
+}
+
+.logoutButton {
+	float:right;
+}
+
+.button {
+	text-align:center;
+	display: inline-block;
+	margin: 15px;
+}
+
+form {
+	text-align:center;
+}
+
+outputText {
+	margin: 10px;
+}
+
+inputText {
+	margin: 10px;
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Registrierung</title>
+	<h:outputStylesheet name="style.css"/>
+</h:head>
+<h:body>
+	<h1>
+		<h:outputText value="Registrierung" />
+	</h1>
+
+	<h:form id="input" styleClass="input">
+		<br></br>
+		<h:outputText value="Nutzername" />
+		<br></br>
+		<h:inputText id="nutzername" maxlength="20"
+			value="#{userBean.nutzername}"></h:inputText>
+
+		<br></br>
+		<h:outputText value="Vorname" />
+		<br></br>
+		<h:inputText id="vorname" maxlength="20"
+			value="#{userBean.vorname}"></h:inputText>
+
+		<br></br>
+		<h:outputText value="Nachname" />
+		<br></br>
+		<h:inputText id="nachname" maxlength="20"
+			value="#{userBean.nachname}"></h:inputText>
+
+		<br></br>
+		<h:outputText value="Passwort" />
+		<br></br>
+		<h:inputSecret id="passwort" maxlength="20"
+			value="#{userBean.passwort}"></h:inputSecret>
+
+		<br></br>
+		<h:outputText value="Passwort Bestätigen" />
+		<br></br>
+		<h:inputSecret id="passwortConfirm" maxlength="20"
+			value="#{userBean.passwortConfirm}"></h:inputSecret>
+
+		<br></br>
+		<h:outputText value="Rolle" />
+		<br></br>
+		<h:selectOneMenu value="#{userBean.rolle}">
+			<f:selectItem itemValue="Mitarbeiter" itemLabel="Mitarbeiter" />
+			<f:selectItem itemValue="Manager" itemLabel="Manager" />
+		</h:selectOneMenu>
+		<br></br>
+		<br></br>
+		<h:outputText id="msg" value="#{userBean.message}"></h:outputText>
+		<br></br>
+		<br></br>
+		<h:commandButton id="registrieren" type="submit" styleClass="button" value="Registrieren"
+			action="#{userBean.registrieren}">
+			<f:ajax execute="input" render="msg"></f:ajax>
+		</h:commandButton>
+	</h:form>
+	<ui:include src="/resources/footer.xhtml" />
+</h:body>
+</html>

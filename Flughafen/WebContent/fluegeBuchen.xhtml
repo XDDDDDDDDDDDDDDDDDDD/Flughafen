@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Flüge</title>
+	<h:outputStylesheet name="style.css" />
+</h:head>
+<h:body>
+	<ui:include src="/resources/header.xhtml" />
+	<ui:include src="#{userBean.including}" />
+
+	<h:form id="feld">
+		<br></br>
+		<h:outputText value="Kunde:"></h:outputText>
+		<h:selectOneMenu value="#{buchenBean.kundenID}">
+			<f:selectItems value="#{kundeBean.allKunden}" var="kunde"
+				itemValue="#{kunde.id}" itemLabel="#{kunde.vorname} #{kunde.nachname}" />
+		</h:selectOneMenu>
+		<br></br>
+		<br></br>
+		<h:outputText value="#{buchenBean.message}"></h:outputText>
+		<br></br>
+		<br></br>
+
+		<h:dataTable value="#{buchenBean.allFluege}" var="flug">
+			<h:column>
+				<f:facet name="header">Flugindex</f:facet>
+				<h:outputText value="#{flug.id}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Startort</f:facet>
+				<h:outputText value="#{flug.getRoute().ort1.name}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Zielort</f:facet>
+				<h:outputText value="#{flug.getRoute().ort2.name}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Flugzeug</f:facet>
+				<h:outputText value="#{flug.flugzeug.code}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Datum</f:facet>
+				<h:outputText value="#{flug.abflugzeit}">
+				<f:convertDateTime pattern="dd.MM.yyyy HH:mm"> </f:convertDateTime>
+				</h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Buchen</f:facet>
+				<h:commandButton value="Buchen" type="submit" id="buchen"
+					action="#{buchenBean.buchen(flug)}">
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+
+	<ui:include src="/resources/footer.xhtml" />
+</h:body>
+</html>

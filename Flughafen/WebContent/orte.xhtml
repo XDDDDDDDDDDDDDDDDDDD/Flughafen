@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Flughäfen</title>
+<style>
+table {
+	border-collapse: collapse;
+	/* so we can control cellspacing in a practical way */
+	width: 10px;
+}
+
+tbody {
+	overflow: auto;
+	width: 100%;
+	height: 600px;
+}
+
+table th, table td {
+	padding: 5px;
+	text-align: center;
+	font-family: Arial, Verdana, sans-serif;
+	border: 1px solid #000; /* let's apply borders */
+}
+
+thead>tr, tbody {
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+	<ui:include src="/resources/header.xhtml" />
+	<ui:include src="#{userBean.including}" />
+
+	<h:form id="feld">
+		<br></br>
+		<h:commandButton id="submit" type="submit"
+			value="Neuen Flughafen hinzufügen" action="#{ortBean.neu}">
+		</h:commandButton>
+		<br></br>
+		<h:dataTable value="#{ortBean.allOrte}" var="ort">
+			<h:column>
+				<f:facet name="header">Index</f:facet>
+				<h:outputText value="#{ort.id}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Flughafenname</f:facet>
+				<h:outputText value="#{ort.name}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Löschen</f:facet>
+				<h:commandLink value="Delete" action="#{ortBean.deleteOrt(ort)}"
+					immediate="true">
+				</h:commandLink>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+	<ui:include src="/resources/footer.xhtml" />
+</body>
+</html>

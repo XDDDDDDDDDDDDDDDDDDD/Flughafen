@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Neuen Kunde anlegen</title>
+<h:outputStylesheet name="style.css"/>
+</head>
+<body>
+<ui:include src="/resources/header.xhtml" />
+	<ui:include src="#{userBean.including}" />
+	<h1>
+		<h:outputText value="Neuen Kunde anlegen" />
+	</h1>
+
+	<h:form id="input">
+		<br></br>
+		<h:outputText value="Vorname" />
+		<br></br>
+		<h:inputText id="vor" maxlength="40"
+			value="#{kundeBean.vorname}"></h:inputText>
+			
+			<br></br>
+		<h:outputText value="Nachname" />
+		<br></br>
+		<h:inputText id="nachname" maxlength="40"
+			value="#{kundeBean.nachname}"></h:inputText>
+
+		
+		<br></br>
+		<br></br>
+		<h:outputText id="msg" value="#{kundeBean.message}"></h:outputText>
+		<br></br>
+		<br></br>
+		<h:commandButton id="erstellen" type="submit" value="Erstellen"
+			action="#{kundeBean.erstellen}">
+			<f:ajax execute="input" render="msg"></f:ajax>
+		</h:commandButton>
+	</h:form>
+	<ui:include src="/resources/footer.xhtml" />
+</body>
+</html>
